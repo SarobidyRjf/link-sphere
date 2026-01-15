@@ -1,13 +1,22 @@
-<!doctype html>
-<html lang="en">
-  <head>
-    <meta charset="UTF-8" />
-    <link rel="icon" type="image/svg+xml" href="/vite.svg" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>link-sphere</title>
-  </head>
-  <body>
-    <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
-  </body>
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>LinkSphere</title>
+  <link rel="stylesheet" href="/src/style.css" />
+</head>
+<body class="font-orbitron text-white">
+  <div class="min-h-screen flex flex-col items-center justify-center p-4">
+    <h1>LinkSphere</h1>
+
+    <!-- Filtres -->
+    <div id="filters" class="flex gap-3 mb-6"></div>
+
+    <!-- Container des liens -->
+    <div id="links-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
+  </div>
+
+  <script type="module" src="/src/main.js"></script>
+</body>
 </html>
