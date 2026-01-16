@@ -57,108 +57,7 @@ const links = [
   }
 ];
 
-// ========================================
-// PARTICLE ANIMATION SYSTEM
-// ========================================
 
-class ParticleSystem {
-  constructor() {
-    this.canvas = document.getElementById('particle-canvas');
-    this.ctx = this.canvas.getContext('2d');
-    this.particles = [];
-    this.particleCount = 50;
-    this.mouse = { x: null, y: null, radius: 150 };
-    
-    this.init();
-  }
-  
-  init() {
-    this.resize();
-    this.createParticles();
-    this.animate();
-    
-    window.addEventListener('resize', () => this.resize());
-    window.addEventListener('mousemove', (e) => {
-      this.mouse.x = e.x;
-      this.mouse.y = e.y;
-    });
-  }
-  
-  resize() {
-    this.canvas.width = window.innerWidth;
-    this.canvas.height = window.innerHeight;
-  }
-  
-  createParticles() {
-    this.particles = [];
-    for (let i = 0; i < this.particleCount; i++) {
-      this.particles.push({
-        x: Math.random() * this.canvas.width,
-        y: Math.random() * this.canvas.height,
-        size: Math.random() * 3 + 1,
-        speedX: Math.random() * 0.5 - 0.25,
-        speedY: Math.random() * 0.5 - 0.25,
-        opacity: Math.random() * 0.5 + 0.2
-      });
-    }
-  }
-  
-  animate() {
-    this.ctx.clearRect(0, 0, this.canvas.width, this.canvas.height);
-    
-    // Get current theme
-    const isDark = document.documentElement.getAttribute('data-theme') === 'dark';
-    const particleColor = isDark ? '255, 255, 255' : '15, 23, 42';
-    
-    this.particles.forEach((particle, index) => {
-      // Update position
-      particle.x += particle.speedX;
-      particle.y += particle.speedY;
-      
-      // Wrap around edges
-      if (particle.x > this.canvas.width) particle.x = 0;
-      if (particle.x < 0) particle.x = this.canvas.width;
-      if (particle.y > this.canvas.height) particle.y = 0;
-      if (particle.y < 0) particle.y = this.canvas.height;
-      
-      // Mouse interaction
-      const dx = this.mouse.x - particle.x;
-      const dy = this.mouse.y - particle.y;
-      const distance = Math.sqrt(dx * dx + dy * dy);
-      
-      if (distance < this.mouse.radius) {
-        const force = (this.mouse.radius - distance) / this.mouse.radius;
-        const angle = Math.atan2(dy, dx);
-        particle.x -= Math.cos(angle) * force * 2;
-        particle.y -= Math.sin(angle) * force * 2;
-      }
-      
-      // Draw particle
-      this.ctx.beginPath();
-      this.ctx.arc(particle.x, particle.y, particle.size, 0, Math.PI * 2);
-      this.ctx.fillStyle = `rgba(${particleColor}, ${particle.opacity})`;
-      this.ctx.fill();
-      
-      // Draw connections
-      this.particles.slice(index + 1).forEach(otherParticle => {
-        const dx = particle.x - otherParticle.x;
-        const dy = particle.y - otherParticle.y;
-        const distance = Math.sqrt(dx * dx + dy * dy);
-        
-        if (distance < 100) {
-          this.ctx.beginPath();
-          this.ctx.strokeStyle = `rgba(${particleColor}, ${0.1 * (1 - distance / 100)})`;
-          this.ctx.lineWidth = 0.5;
-          this.ctx.moveTo(particle.x, particle.y);
-          this.ctx.lineTo(otherParticle.x, otherParticle.y);
-          this.ctx.stroke();
-        }
-      });
-    });
-    
-    requestAnimationFrame(() => this.animate());
-  }
-}
 
 // ========================================
 // THEME TOGGLE
@@ -244,16 +143,16 @@ function generateLinkCards() {
     const content = document.createElement('div');
     content.className = 'link-card-content';
     
-    if (link.icon) {
-      const icon = document.createElement('span');
-      icon.className = 'link-card-icon';
-      icon.textContent = link.icon;
-      icon.style.fontSize = link.featured ? '2.5rem' : '1.5rem';
-      content.appendChild(icon);
+    // Add SVG icon
+    if (link.iconKey && ICONS[link.iconKey]) {
+      const iconWrapper = document.createElement('div');
+      iconWrapper.className = 'link-card-icon';
+      iconWrapper.innerHTML = ICONS[link.iconKey];
+      content.appendChild(iconWrapper);
     }
     
     const name = document.createElement('span');
-    name.textContent = link.name.replace(/^[^\w\s]+\s*/, ''); // Remove emoji from name if icon exists
+    name.textContent = link.name;
     content.appendChild(name);
     
     card.appendChild(content);
@@ -290,9 +189,6 @@ function initScrollReveal() {
 document.addEventListener('DOMContentLoaded', () => {
   // Generate link cards
   generateLinkCards();
-  
-  // Initialize particle system
-  new ParticleSystem();
   
   // Initialize theme manager
   new ThemeManager();
