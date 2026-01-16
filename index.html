@@ -1,35 +1,100 @@
 <!DOCTYPE html>
-<html lang="fr">
+<html lang="fr" data-theme="dark">
 <head>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>LinkSphere</title>
+  <title>LinkSphere - Your Digital Universe</title>
+  <meta name="description" content="Centralisez votre univers digital avec style" />
+  
+  <!-- Google Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&family=Outfit:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+  
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="min-h-screen overflow-hidden text-white">
-  <main class="relative z-10 flex flex-col items-center justify-center h-screen">
+<body>
+  <!-- Particle Canvas Background -->
+  <canvas id="particle-canvas"></canvas>
+  
+  <!-- Gradient Mesh Background -->
+  <div class="gradient-mesh"></div>
+
+  <!-- Theme Toggle -->
+  <button id="theme-toggle" class="theme-toggle" aria-label="Toggle theme">
+    <svg class="sun-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <circle cx="12" cy="12" r="5"/>
+      <line x1="12" y1="1" x2="12" y2="3"/>
+      <line x1="12" y1="21" x2="12" y2="23"/>
+      <line x1="4.22" y1="4.22" x2="5.64" y2="5.64"/>
+      <line x1="18.36" y1="18.36" x2="19.78" y2="19.78"/>
+      <line x1="1" y1="12" x2="3" y2="12"/>
+      <line x1="21" y1="12" x2="23" y2="12"/>
+      <line x1="4.22" y1="19.78" x2="5.64" y2="18.36"/>
+      <line x1="18.36" y1="5.64" x2="19.78" y2="4.22"/>
+    </svg>
+    <svg class="moon-icon" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+      <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z"/>
+    </svg>
+  </button>
+
+  <!-- Main Container -->
+  <main class="container">
     
-    <header class="mb-12 text-center">
-      <h1 class="text-4xl md:text-5xl font-semibold tracking-wide">
-        LinkSphere
+    <!-- Profile Header -->
+    <header class="profile-header">
+      <div class="avatar-wrapper">
+        <div class="avatar">
+          <svg width="80" height="80" viewBox="0 0 100 100" fill="none">
+            <circle cx="50" cy="50" r="48" fill="url(#avatar-gradient)"/>
+            <circle cx="50" cy="40" r="15" fill="white" opacity="0.9"/>
+            <path d="M30 75 Q30 55 50 55 Q70 55 70 75" fill="white" opacity="0.9"/>
+            <defs>
+              <linearGradient id="avatar-gradient" x1="0" y1="0" x2="100" y2="100">
+                <stop offset="0%" stop-color="#6366f1"/>
+                <stop offset="100%" stop-color="#8b5cf6"/>
+              </linearGradient>
+            </defs>
+          </svg>
+        </div>
+      </div>
+      
+      <h1 class="profile-name">
+        <span class="gradient-text">LinkSphere</span>
       </h1>
-      <p class="text-white/60 mt-2">
-        Centralisez votre univers digital
+      
+      <p class="profile-bio">
+        Centralisez votre univers digital avec style ✨
       </p>
+      
+      <div class="stats-row">
+        <div class="stat-item">
+          <div class="stat-value">2.5K</div>
+          <div class="stat-label">Followers</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">12K</div>
+          <div class="stat-label">Views</div>
+        </div>
+        <div class="stat-item">
+          <div class="stat-value">98%</div>
+          <div class="stat-label">Engagement</div>
+        </div>
+      </div>
     </header>
 
-    <!-- Carousel -->
-    <div class="w-full max-w-5xl">
-      <div id="links-container" class="slick-carousel"></div>
-    </div>
+    <!-- Bento Grid Links -->
+    <section class="bento-grid" id="links-container">
+      <!-- Links will be dynamically inserted here -->
+    </section>
+
+    <!-- Footer -->
+    <footer class="footer">
+      <p>Made with <span class="gradient-text">❤️</span> using LinkSphere</p>
+    </footer>
 
   </main>
 
-  <!-- Orbes animés -->
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
-
   <script type="module" src="/src/main.js"></script>
 </body>
-
 </html>

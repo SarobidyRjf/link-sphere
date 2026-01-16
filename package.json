@@ -12,8 +12,6 @@
     "@tailwindcss/vite": "^4.1.18",
     "tailwindcss": "^4.1.18",
     "vite": "^7.2.4"
-  },
-  "dependencies": {
-    "slick-carousel": "^1.8.1"
   }
 }
+
