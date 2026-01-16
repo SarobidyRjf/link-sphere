@@ -6,17 +6,30 @@
   <title>LinkSphere</title>
   <link rel="stylesheet" href="/src/style.css" />
 </head>
-<body class="font-orbitron text-white">
-  <div class="min-h-screen flex flex-col items-center justify-center p-4">
-    <h1>LinkSphere</h1>
+<body class="min-h-screen overflow-hidden text-white">
+  <main class="relative z-10 flex flex-col items-center justify-center h-screen">
+    
+    <header class="mb-12 text-center">
+      <h1 class="text-4xl md:text-5xl font-semibold tracking-wide">
+        LinkSphere
+      </h1>
+      <p class="text-white/60 mt-2">
+        Centralisez votre univers digital
+      </p>
+    </header>
 
-    <!-- Filtres -->
-    <div id="filters" class="flex gap-3 mb-6"></div>
+    <!-- Carousel -->
+    <div class="w-full max-w-5xl">
+      <div id="links-container" class="slick-carousel"></div>
+    </div>
 
-    <!-- Container des liens -->
-    <div id="links-container" class="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 lg:grid-cols-4 gap-6"></div>
-  </div>
+  </main>
+
+  <!-- Orbes animés -->
+  <div class="orb orb-1"></div>
+  <div class="orb orb-2"></div>
 
   <script type="module" src="/src/main.js"></script>
 </body>
+
 </html>
